@@ -2,8 +2,6 @@
 
 > An ultra-luxury, high-performance 3D timepiece e-commerce platform and executive management portal tailored for the Pakistan luxury watch market.
 
-![MK Watches Preview](public/logo-black.png)
-
 ---
 
 ## ✨ Highlights & Features
