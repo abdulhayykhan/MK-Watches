@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MK WATCHES PAKISTAN | Premier Branded Watches & Luxury Timepieces</title>
+  <link id="site-favicon" rel="icon" type="image/png" href="logo-black.png" />
+  <link rel="stylesheet" href="./src/styles/main.css" />
+</head>
+<body class="theme-dark">
+
+  <!-- Custom Luxury Cursor -->
+  <div class="custom-cursor"></div>
+  <div class="custom-cursor-follower"></div>
+
+  <!-- Top Announcement Bar (Pakistani E-commerce Trust) -->
+  <div class="top-announcement-bar">
+    <div class="top-bar-left">
+      <div class="top-bar-item">
+        <span>🇵🇰</span>
+        <span>FREE DELIVERY ALL OVER PAKISTAN (TCS / LEOPARDS)</span>
+      </div>
+      <div class="top-bar-item desktop-only">
+        <span>📦</span>
+        <span>OPEN PARCEL BEFORE PAYMENT ALLOWED</span>
+      </div>
+    </div>
+    <div class="top-bar-right">
+      <div class="top-bar-item desktop-only">
+        <span>🛡️</span>
+        <span>1-YEAR WARRANTY & 7-DAY EXCHANGE</span>
+      </div>
+      <a href="https://wa.me/923001234567?text=Hello%20MK%20Watches%20Pakistan%2C%20I%20am%20interested%20in%20buying%20a%20watch" target="_blank" class="top-bar-whatsapp">
+        <span>💬 WhatsApp: +92 300 1234567</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Background Ambience & Atmospheric Noise -->
+  <div class="ambient-glow"></div>
+  <div class="grain-overlay"></div>
+
+  <!-- Three.js Canvas Container -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- Luxury Preloader -->
+  <div id="preloader">
+    <div class="loader-brand">
+      <img id="preloader-logo" src="logo-black.png" alt="MK Watches Pakistan" class="loader-logo-img" />
+      <div class="loader-bar-wrap">
+        <div class="loader-bar"></div>
+      </div>
+      <div class="loader-status">CONNECTING TO MK WATCHES SHOWROOM...</div>
+    </div>
+  </div>
+
+  <!-- Fixed Navigation -->
+  <nav class="navbar">
+    <a href="#" class="brand-wrapper">
+      <img id="nav-logo" src="logo-black.png" alt="MK Watches Pakistan" class="nav-logo" />
+      <div class="brand-text-wrap">
+        <span class="brand-title">MK WATCHES</span>
+        <span class="brand-tag">PAKISTAN • AUTHORIZED RETAILER</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#hero" class="nav-link">Home</a></li>
+      <li><a href="#brands" class="nav-link">Brands</a></li>
+      <li><a href="#catalog" class="nav-link">Catalog</a></li>
+      <li><a href="#showroom" class="nav-link">3D Inspection</a></li>
+      <li><a href="#trust" class="nav-link">Why MK</a></li>
+      <li><a href="#reviews" class="nav-link">Reviews</a></li>
+    </ul>
+
+    <div class="nav-actions">
+
+      <!-- Theme Switcher (White / Dark Mode) -->
+      <button id="theme-toggle" class="theme-btn" title="Toggle White/Dark Mode">
+        <svg class="theme-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="theme-icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <span class="theme-text">DARK</span>
+      </button>
+
+      <!-- Cart / Vault Bag -->
+      <button id="bag-btn" class="bag-trigger" title="Open Reserved Vault">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="bag-badge">0</span>
+      </button>
+
+      <!-- Order Online Button -->
+      <button class="vip-btn vip-trigger">Order COD</button>
+
+      <!-- Mobile Menu Hamburger Button -->
+      <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+    <div class="mobile-nav-header">
+      <div class="brand-wrapper">
+        <img id="mobile-drawer-logo" src="logo-black.png" alt="MK Watches" class="nav-logo" />
+        <div class="brand-text-wrap">
+          <span class="brand-title">MK WATCHES</span>
+          <span class="brand-tag">PAKISTAN • AUTHORIZED</span>
+        </div>
+      </div>
+      <button id="mobile-nav-close" class="mobile-nav-close" aria-label="Close Navigation Menu">&times;</button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="#hero" class="mobile-nav-link">Home</a></li>
+      <li><a href="#brands" class="mobile-nav-link">Top Brands</a></li>
+      <li><a href="#catalog" class="mobile-nav-link">Curated Catalog</a></li>
+      <li><a href="#showroom" class="mobile-nav-link">3D Inspection</a></li>
+      <li><a href="#customizer" class="mobile-nav-link">3D Atelier</a></li>
+      <li><a href="#trust" class="mobile-nav-link">Why MK Watches</a></li>
+      <li><a href="#reviews" class="mobile-nav-link">Customer Reviews</a></li>
+    </ul>
+    <div class="mobile-nav-footer">
+      <a href="https://wa.me/923001234567?text=Assalam-o-Alaikum%2C%20I%20want%20to%20order%20from%20MK%20Watches" target="_blank" class="mobile-nav-wa-btn">
+        <span>Order on WhatsApp: +92 300 1234567</span>
+      </a>
+      <div class="mobile-nav-badges">
+        <span>🇵🇰 Cash on Delivery</span>
+        <span>📦 Open Parcel Inspection</span>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-nav-backdrop" class="mobile-nav-backdrop"></div>
+
+  <!-- 3D Hotspot Screen Overlay -->
+  <div class="hotspot-layer">
+    <div id="hotspot-crystal" class="hotspot-pin">
+      <div class="pin-core">
+        <div class="pin-dot"></div>
+        <div class="pin-ripple"></div>
+      </div>
+      <div class="pin-card">
+        <div class="pin-card-title">Scratchproof Sapphire Glass</div>
+        <div class="pin-card-spec">Double-Domed • 100% Quality Inspected</div>
+      </div>
+    </div>
+
+    <div id="hotspot-bezel" class="hotspot-pin">
+      <div class="pin-core">
+        <div class="pin-dot"></div>
+        <div class="pin-ripple"></div>
+      </div>
+      <div class="pin-card">
+        <div class="pin-card-title">Diamond-Cut Fluted Bezel</div>
+        <div class="pin-card-spec">Premium IP Plating • Never Fades</div>
+      </div>
+    </div>
+
+    <div id="hotspot-dial" class="hotspot-pin">
+      <div class="pin-core">
+        <div class="pin-dot"></div>
+        <div class="pin-ripple"></div>
+      </div>
+      <div class="pin-card">
+        <div class="pin-card-title">Sunburst Textured Dial</div>
+        <div class="pin-card-spec">Super-LumiNova® Night Glow Indices</div>
+      </div>
+    </div>
+
+    <div id="hotspot-movement" class="hotspot-pin">
+      <div class="pin-core">
+        <div class="pin-dot"></div>
+        <div class="pin-ripple"></div>
+      </div>
+      <div class="pin-card">
+        <div class="pin-card-title">Precision Calibre Movement</div>
+        <div class="pin-card-spec">Tested & Calibrated with 1-Year Warranty</div>
+      </div>
+    </div>
+
+    <div id="hotspot-case" class="hotspot-pin">
+      <div class="pin-core">
+        <div class="pin-dot"></div>
+        <div class="pin-ripple"></div>
+      </div>
+      <div class="pin-card">
+        <div class="pin-card-title">Solid 316L/904L Steel Case</div>
+        <div class="pin-card-spec">Water Resistant • TCS Express Delivery</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Scrollable Content -->
+  <main class="main-content">
+
+    <!-- Hero Section -->
+    <section id="hero" class="section hero-section interactive-content">
+      <div class="hero-main-content">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <span class="hero-badge-text">🇵🇰 PAKISTAN'S #1 WATCH DESTINATION • 15,000+ ORDERS DELIVERED</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span>ORIGINAL WATCHES.</span>
+          <span class="text-gold">BEST PRICES IN PAKISTAN.</span>
+        </h1>
+
+        <p class="hero-desc">
+          Shop top international luxury brands (Rolex, Omega, Tissot), Japanese precision watches (Casio, Seiko), and trending fashion favourites (Michael Kors, Fossil, Curren). <strong>Cash on Delivery (COD)</strong> with <strong>Open Parcel Inspection</strong> at your doorstep across Pakistan.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#catalog" class="btn-primary">
+            <span>Shop Watches in PKR</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </a>
+          <a href="https://wa.me/923001234567?text=Assalam-o-Alaikum%2C%20I%20want%20to%20order%20a%20watch%20from%20MK%20Watches" target="_blank" class="btn-outline btn-hero-whatsapp">
+            <span>Order on WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Trust Bar -->
+      <div class="hero-specs-bar">
+        <div class="spec-item">
+          <span class="spec-val">CASH ON DELIVERY</span>
+          <span class="spec-lbl">200+ Cities Across Pakistan</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-val">OPEN PARCEL</span>
+          <span class="spec-lbl">Check Watch Before Paying</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-val">1-YEAR WARRANTY</span>
+          <span class="spec-lbl">Official Machine Warranty</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-val">7 DAYS RETURN</span>
+          <span class="spec-lbl">100% Money-Back Guarantee</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-val">2-3 DAYS TCS</span>
+          <span class="spec-lbl">Express Nationwide Delivery</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Brands Ticker Section -->
+    <section id="brands" class="brand-ticker-section">
+      <div class="brand-ticker-label">TOP LUXURY & POPULAR BRANDS DELIVERED ACROSS PAKISTAN</div>
+      <div class="brand-logos-row">
+        <span class="brand-pill" data-brand="rolex">ROLEX</span>
+        <span class="brand-pill" data-brand="omega">OMEGA</span>
+        <span class="brand-pill" data-brand="tissot">TISSOT</span>
+        <span class="brand-pill" data-brand="casio">CASIO EDIFICE</span>
+        <span class="brand-pill" data-brand="gshock">G-SHOCK</span>
+        <span class="brand-pill" data-brand="seiko">SEIKO</span>
+        <span class="brand-pill" data-brand="mk">MICHAEL KORS</span>
+        <span class="brand-pill" data-brand="fossil">FOSSIL</span>
+        <span class="brand-pill" data-brand="curren">CURREN</span>
+        <span class="brand-pill" data-brand="naviforce">NAVIFORCE</span>
+      </div>
+    </section>
+
+    <!-- 3D Virtual Showroom (Inspection Section) -->
+    <section id="showroom" class="anatomy-section">
+      <div class="sticky-viewport">
+        <div class="anatomy-sidebar interactive-content">
+          <div class="section-label">3D Virtual Showroom</div>
+          <h2 class="section-heading">INSPECT 360°<br/><span class="text-gold">BEFORE YOU BUY.</span></h2>
+          <p class="section-subtext">
+            Zero risk shopping. We inspect and calibrate every single timepiece before dispatching via TCS / Leopards. Scroll down to inspect each internal layer of craftsmanship.
+          </p>
+
+          <div class="parts-stepper">
+            <div class="part-card active" data-step="0">
+              <div class="part-card-header">
+                <span class="part-index">INSPECTION 01</span>
+                <span class="part-title">Sapphire Crystal Dome</span>
+              </div>
+              <p class="part-desc">Scratch-resistant glass tested under optical lights. No blemishes, anti-reflective coating intact.</p>
+            </div>
+
+            <div class="part-card" data-step="1">
+              <div class="part-card-header">
+                <span class="part-index">INSPECTION 02</span>
+                <span class="part-title">Diamond-Cut Bezel</span>
+              </div>
+              <p class="part-desc">IP electroplated bezel finish that resists tarnishing, perspiration, and daily wear in Pakistan's weather.</p>
+            </div>
+
+            <div class="part-card" data-step="2">
+              <div class="part-card-header">
+                <span class="part-index">INSPECTION 03</span>
+                <span class="part-title">Sunburst Dial & Hands</span>
+              </div>
+              <p class="part-desc">Subdials, date calendar, and luminous hands tested for smooth alignment and chronograph reset.</p>
+            </div>
+
+            <div class="part-card" data-step="3">
+              <div class="part-card-header">
+                <span class="part-index">INSPECTION 04</span>
+                <span class="part-title">Machine & Battery Movement</span>
+              </div>
+              <p class="part-desc">24-hour timekeeping accuracy test conducted by our Karachi master technician before packaging.</p>
+            </div>
+
+            <div class="part-card" data-step="4">
+              <div class="part-card-header">
+                <span class="part-index">INSPECTION 05</span>
+                <span class="part-title">Case & Strap Assembly</span>
+              </div>
+              <p class="part-desc">Deployant butterfly clasp and solid links adjusted. Shipped inside a luxury wooden gift box with warranty card.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D Atelier / Customizer Model Viewer -->
+    <section id="customizer" class="section customizer-section">
+      <div class="customizer-panel interactive-content">
+        <div class="section-label">Interactive 3D Viewer</div>
+        <h2 class="customizer-title">SELECT & <span class="text-gold">INSPECT</span></h2>
+        <p class="customizer-desc">
+          Drag the 3D watch to inspect from every angle. Pick your favourite finish and order via Cash on Delivery.
+        </p>
+
+        <!-- Edition Selector -->
+        <div class="config-group">
+          <div class="config-group-title">
+            <span>Featured Brand Finishes</span>
+            <span class="text-gold">Live 3D</span>
+          </div>
+          <div class="config-options-grid">
+            <button class="edition-btn active" data-edition="imperial">
+              <div class="color-swatch swatch-gold"></div>
+              <span class="edition-name">MK Rose Gold</span>
+            </button>
+            <button class="edition-btn" data-edition="platinum">
+              <div class="color-swatch swatch-platinum"></div>
+              <span class="edition-name">Tissot Steel</span>
+            </button>
+            <button class="edition-btn" data-edition="emerald">
+              <div class="color-swatch swatch-emerald"></div>
+              <span class="edition-name">Seiko Emerald</span>
+            </button>
+            <button class="edition-btn" data-edition="stealth">
+              <div class="color-swatch swatch-stealth"></div>
+              <span class="edition-name">G-Shock Stealth</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Strap Selector -->
+        <div class="config-group">
+          <div class="config-group-title">
+            <span>Strap Options</span>
+          </div>
+          <div class="strap-selector">
+            <button class="strap-btn active" data-strap="leather">Italian Leather</button>
+            <button class="strap-btn" data-strap="bracelet">Oyster Steel</button>
+            <button class="strap-btn" data-strap="rubber">FKM Rubber</button>
+          </div>
+        </div>
+
+        <!-- Super-LumiNova Night Mode Switch -->
+        <div class="lume-toggle-bar">
+          <div class="lume-info">
+            <div class="lume-dot"></div>
+            <span class="lume-text">Check Luminous Night Glow</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="lume-toggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- Summary & Reserve -->
+        <div class="config-summary">
+          <div class="price-tag">
+            <span class="price-sub">PRICE IN PAKISTAN (COD)</span>
+            <span class="price-val">Rs. 48,500</span>
+          </div>
+          <button class="btn-primary vip-trigger">
+            <span>Order via COD</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Curated Product Catalog Section (With Brand & Price Filters) -->
+    <section id="catalog" class="section collections-section interactive-content">
+      <div class="collections-header">
+        <div>
+          <div class="section-label">Top Sellers in Pakistan</div>
+          <h2 class="section-heading">CURATED <span class="text-gold">WATCH CATALOG</span></h2>
+        </div>
+        <p class="section-subtext" style="margin-bottom: 0; max-width: 420px;">
+          All watches come with <strong>Official Presentation Box</strong>, <strong>1-Year Warranty Card</strong>, and <strong>Open Parcel Delivery</strong> across Pakistan.
+        </p>
+      </div>
+
+      <!-- Catalog Filter Pills -->
+      <div class="catalog-filter-bar">
+        <button class="filter-tab active" data-filter="all">All Watches (<span id="filter-count-all">8</span>)</button>
+        <button class="filter-tab" data-filter="luxury">Luxury Swiss (<span id="filter-count-luxury">3</span>)</button>
+        <button class="filter-tab" data-filter="japanese">Japanese Precision (<span id="filter-count-japanese">3</span>)</button>
+        <button class="filter-tab" data-filter="fashion">Fashion & Lifestyle (<span id="filter-count-fashion">1</span>)</button>
+        <button class="filter-tab" data-filter="budget">Under Rs. 15,000 (<span id="filter-count-budget">1</span>)</button>
+      </div>
+
+      <div id="collections-grid" class="collections-grid">
+        <!-- Dynamically rendered via inventoryManager.getProducts() -->
+      </div>
+    </section>
+
+    <!-- Trust & Quality Assurance in Pakistan -->
+    <section id="trust" class="trust-section">
+      <div class="section-center-head" style="margin-bottom: 3.5rem;">
+        <div class="section-label" style="justify-content: center;">Peace of Mind Shopping</div>
+        <h2 class="section-heading">WHY THOUSANDS OF PAKISTANIS<br/><span class="text-gold">TRUST MK WATCHES</span></h2>
+        <p class="section-subtext">
+          We eliminate the uncertainty of buying watches online in Pakistan with guaranteed authentic checks and open parcel delivery.
+        </p>
+      </div>
+
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-icon-box">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+          </div>
+          <h3 class="trust-title">Open Parcel Check</h3>
+          <p class="trust-desc">Open and inspect your watch in front of the TCS/Leopards delivery rider before handing over the cash payment.</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-icon-box">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3 class="trust-title">1-Year Warranty Card</h3>
+          <p class="trust-desc">Every watch comes stamped with an official movement warranty card and dedicated customer service support.</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-icon-box">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <h3 class="trust-title">Fast Nationwide Shipping</h3>
+          <p class="trust-desc">Deliveries within 24-48 hours in Karachi, Lahore, Islamabad, and 2-3 working days across all other cities in Pakistan.</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-icon-box">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="trust-title">Dedicated WhatsApp Support</h3>
+          <p class="trust-desc">Need real videos or photos of the watch before ordering? Our sales team is ready on WhatsApp 24/7.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Verified Pakistani Customer Reviews -->
+    <section id="reviews" class="reviews-section">
+      <div class="section-center-head" style="margin-bottom: 3.5rem;">
+        <div class="section-label" style="justify-content: center;">Customer Experiences</div>
+        <h2 class="section-heading">WHAT OUR BUYERS IN PAKISTAN<br/><span class="text-gold">SAY ABOUT US</span></h2>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-stars">★★★★★</div>
+            <span class="review-city-badge">DHA, Karachi</span>
+          </div>
+          <p class="review-text">
+            "Bhai parcel open karke rider k samne check kia. Box quality, warranty card aur watch 100% original thi. Delivered in just 2 days in Karachi. Best watch retailer in Pakistan!"
+          </p>
+          <div class="review-author">Hamza Tariq</div>
+          <div class="review-watch-bought">Purchased: MK Lexington Chronograph</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-stars">★★★★★</div>
+            <span class="review-city-badge">Gulberg, Lahore</span>
+          </div>
+          <p class="review-text">
+            "Ordered the Tissot PRX to Lahore. The 3D view on the website helped me see the exact ice blue waffle dial texture. Received via TCS in genuine presentation box. Zabardast service!"
+          </p>
+          <div class="review-author">Bilal Sheikh</div>
+          <div class="review-watch-bought">Purchased: Tissot PRX Powermatic 80</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-stars">★★★★★</div>
+            <span class="review-city-badge">F-7, Islamabad</span>
+          </div>
+          <p class="review-text">
+            "I was skeptical about buying an expensive watch online in Pakistan, but the Cash on Delivery and WhatsApp video confirmation gave me full confidence. Highly recommended!"
+          </p>
+          <div class="review-author">Dr. Farhan Malik</div>
+          <div class="review-watch-bought">Purchased: Casio Edifice Chronograph</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Pakistan Order / Checkout Modal -->
+  <div id="vip-modal" class="modal-overlay">
+    <div class="modal-box">
+      <button id="modal-close" class="modal-close-btn">&times;</button>
+      <div class="section-label">Cash on Delivery Order</div>
+      <h3 class="customizer-title" style="margin-bottom: 0.5rem;">CONFIRM YOUR <span class="text-gold">WATCH ORDER</span></h3>
+      <p class="section-subtext" style="font-size: 0.85rem; margin-bottom: 1.5rem;">
+        Enter your delivery address below. Pay cash when the TCS / Leopards rider delivers to your doorstep. Free delivery across Pakistan.
+      </p>
+
+      <form id="vip-reservation-form">
+        <div class="form-group">
+          <label class="form-label" for="checkout-name">Full Name</label>
+          <input type="text" id="checkout-name" class="form-input" placeholder="e.g. Muhammad Usman" required />
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="checkout-phone">WhatsApp Number (For Order Tracking)</label>
+            <input type="tel" id="checkout-phone" class="form-input" placeholder="0300-1234567" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="checkout-city">City</label>
+            <select id="checkout-city" class="form-input">
+              <option value="Karachi">Karachi</option>
+              <option value="Lahore">Lahore</option>
+              <option value="Islamabad">Islamabad</option>
+              <option value="Rawalpindi">Rawalpindi</option>
+              <option value="Faisalabad">Faisalabad</option>
+              <option value="Multan">Multan</option>
+              <option value="Peshawar">Peshawar</option>
+              <option value="Sialkot">Sialkot</option>
+              <option value="Gujranwala">Gujranwala</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Quetta">Quetta</option>
+              <option value="Other Cities (Nationwide)">Other Cities (Nationwide)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="checkout-address">Complete Delivery Address (House/Street/Sector/Area)</label>
+          <input type="text" id="checkout-address" class="form-input" placeholder="House #, Street #, Phase / Block / Area" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="checkout-payment">Payment Option</label>
+          <select id="checkout-payment" class="form-input">
+            <option value="Cash on Delivery (Pay at Doorstep)">💵 Cash on Delivery (Pay at Doorstep) - Recommended</option>
+            <option value="JazzCash / Easypaisa">📱 JazzCash / Easypaisa (Direct Transfer)</option>
+            <option value="Bank Transfer / Raast">🏦 Bank Transfer / Raast (Meezan / HBL / Nayapay / Sadapay)</option>
+          </select>
+        </div>
+
+        <div class="checkout-trust-checkbox">
+          <input type="checkbox" id="open-parcel-check" checked />
+          <label for="open-parcel-check">I want open parcel inspection before paying the delivery rider</label>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 0.5rem;">
+          <span>CONFIRM CASH ON DELIVERY ORDER</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cart / Vault Drawer -->
+  <aside id="cart-drawer" class="cart-drawer">
+    <div class="cart-drawer-header">
+      <span class="cart-drawer-title">YOUR SHOPPING CART</span>
+      <button id="cart-close" class="modal-close-btn" style="position: static;">&times;</button>
+    </div>
+    
+    <div id="cart-items-container" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; padding-right: 0.5rem;">
+      <!-- Dynamically filled with selected watches -->
+      <div id="cart-empty-state" style="margin: auto; text-align: center;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold-primary)" stroke-width="1.5" style="margin-bottom: 1rem;">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        <div style="font-family: var(--font-serif); font-size: 1.1rem; margin-bottom: 0.5rem;">YOUR CART IS EMPTY</div>
+        <p style="font-size: 0.82rem; color: var(--text-muted); max-width: 260px;">Select a watch and click "Add to Cart" to order with Cash on Delivery.</p>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid var(--border-subtle); padding-top: 1.2rem; margin-top: 1rem;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+        <span>Delivery (TCS Express)</span>
+        <span style="color: #25D366; font-weight: 700;">FREE</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1.2rem; font-size: 1.15rem; font-weight: 700;">
+        <span>Total:</span>
+        <span id="cart-total-price" style="color: var(--gold-light);">Rs. 0</span>
+      </div>
+      <button class="btn-primary vip-trigger" style="width: 100%; justify-content: center; margin-bottom: 0.6rem;">
+        <span>PROCEED TO CHECKOUT (COD)</span>
+      </button>
+      <a id="cart-whatsapp-checkout" href="https://wa.me/923001234567?text=Assalam-o-Alaikum%20MK%20Watches%2C%20I%20want%20to%20order%20my%20cart%20items" target="_blank" class="btn-whatsapp-sm" style="width: 100%; text-align: center; gap: 0.4rem; padding: 0.75rem 0;">
+        <span>Order Cart via WhatsApp</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Luxury Footer -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <img id="footer-logo" src="logo-black.png" alt="MK Watches Pakistan" class="footer-logo" />
+        <p class="footer-desc">
+          MK Watches Pakistan is the premier destination for genuine luxury, sports, and fashion timepieces. Authorized collections, warranty backed, and Cash on Delivery to your doorstep.
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Shop by Category</div>
+        <ul class="footer-links">
+          <li><a href="#catalog" class="footer-link">Luxury Swiss (Rolex, Omega, Tissot)</a></li>
+          <li><a href="#catalog" class="footer-link">Japanese Sports (Casio, Seiko)</a></li>
+          <li><a href="#catalog" class="footer-link">Fashion Brands (MK, Fossil)</a></li>
+          <li><a href="#catalog" class="footer-link">Budget Friendly Under 15k</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Store & Pickup Points</div>
+        <ul class="footer-links">
+          <li><span class="footer-link">Karachi • Dolmen Mall Clifton</span></li>
+          <li><span class="footer-link">Lahore • Packages Mall, Walton</span></li>
+          <li><span class="footer-link">Islamabad • Centaurus Mall</span></li>
+          <li><span class="footer-link">Faisalabad • Kohinoor City</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Customer Care</div>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/923001234567" target="_blank" class="footer-link" style="color: #25D366;">WhatsApp Support: 0300-1234567</a></li>
+          <li><a href="#" class="footer-link vip-trigger">Track TCS Order</a></li>
+          <li><a href="#" class="footer-link vip-trigger">Warranty & Exchange Policy</a></li>
+          <li><a href="#" class="footer-link vip-trigger">Corporate & Gift Inquiries</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 MK WATCHES PAKISTAN. ALL RIGHTS RESERVED. NATIONWIDE CASH ON DELIVERY.<a href="admin.html" id="hidden-admin-link" class="hidden-admin-link" aria-label="Portal" title="">&bull;</a></div>
+      <div>PAY VIA COD • JAZZCASH • EASYPAISA • RAAST • NAYAPAY</div>
+    </div>
+  </footer>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production build outputs
+dist/
+dist-ssr/
+
+# Test and audit outputs
+audit_results/
+coverage/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE & Editor caches
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace

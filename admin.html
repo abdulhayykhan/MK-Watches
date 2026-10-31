@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>MK Watches Pakistan • Executive Admin Portal</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles/admin.css">
+</head>
+<body class="admin-body-portal">
+
+  <!-- ========================================================
+       1. AUTHENTICATION & LOGIN GATE (Shown if not logged in)
+       ======================================================== -->
+  <div id="admin-login-view" class="admin-auth-screen">
+    <div class="admin-auth-card">
+      <div class="admin-auth-shield">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <path d="M9 12l2 2 4-4"></path>
+        </svg>
+      </div>
+
+      <div class="admin-auth-badge">RESTRICTED EXECUTIVE ACCESS</div>
+      <h1 class="admin-auth-title">MK WATCHES <span class="text-gold">PORTAL</span></h1>
+      <p class="admin-auth-desc">Authorized personnel only. Enter Master Security PIN to unlock live store inventory, orders pipeline, and pricing management.</p>
+
+      <form id="admin-login-form" class="admin-auth-form">
+        <div class="form-group">
+          <label for="admin-passcode" class="admin-label">Master Security PIN</label>
+          <div class="admin-input-wrap">
+            <input 
+              type="password" 
+              id="admin-passcode" 
+              class="admin-auth-input" 
+              placeholder="Enter PIN (e.g. 8286)" 
+              required 
+              autocomplete="current-password"
+              autofocus
+            />
+            <button type="button" id="toggle-pin-visibility" class="btn-toggle-eye" title="Show/Hide PIN">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <div id="admin-login-error" class="admin-auth-error" style="display: none;">
+            ⚠️ Access Denied: Invalid Security Credentials.
+          </div>
+        </div>
+
+        <button type="submit" class="admin-btn-primary" style="width: 100%; justify-content: center; padding: 0.85rem;">
+          <span>AUTHENTICATE & ENTER PORTAL</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </form>
+
+      <div class="admin-auth-footer">
+        <a href="/" class="admin-back-store-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Return to Public Storefront</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       2. MAIN STANDALONE ADMIN DASHBOARD (Shown when verified)
+       ======================================================== -->
+  <div id="admin-dashboard-view" class="admin-dashboard-layout" style="display: none;">
+
+    <!-- Top Admin Header Bar -->
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <a href="/" class="admin-brand">
+          <div class="brand-crest">MK</div>
+          <div class="brand-info">
+            <span class="brand-name">MK WATCHES <span class="text-gold">PAKISTAN</span></span>
+            <span class="portal-badge">EXECUTIVE COMMERCE PORTAL</span>
+          </div>
+        </a>
+
+        <div class="system-status-indicator">
+          <span class="status-dot pulse"></span>
+          <span class="status-label">STOREFRONT LIVE • REAL-TIME SYNC</span>
+        </div>
+      </div>
+
+      <div class="topbar-center">
+        <div id="live-pkt-clock" class="live-clock">
+          <span class="clock-label">PKT</span>
+          <span id="clock-time" class="clock-time">--:--:--</span>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <a href="/" target="_blank" class="admin-btn-outline" title="Open customer storefront in a new tab">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          <span>View Storefront</span>
+        </a>
+
+        <button id="btn-admin-signout" class="admin-btn-danger" title="Lock session & logout">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Lock Admin</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace (Sidebar + Dynamic Workspace Area) -->
+    <div class="admin-workspace">
+
+      <!-- Navigation Sidebar -->
+      <aside class="admin-sidebar">
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-tab="overview">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span>Dashboard Overview</span>
+          </button>
+
+          <button class="nav-item" data-tab="inventory">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+            </svg>
+            <span>Timepiece Inventory</span>
+            <span id="badge-total-prods" class="sidebar-badge">8</span>
+          </button>
+
+          <button class="nav-item" data-tab="add-product">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+            <span>Add New Product</span>
+          </button>
+
+          <button class="nav-item" data-tab="orders">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span>Nationwide Orders (COD)</span>
+            <span id="badge-total-orders" class="sidebar-badge badge-green">0</span>
+          </button>
+
+          <button class="nav-item" data-tab="settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+            <span>Store Settings & Tools</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-store-summary">
+          <div class="summary-label">PAKISTAN LOGISTICS</div>
+          <div class="summary-item">
+            <span>Courier Partner:</span>
+            <strong>TCS & Leopard Express</strong>
+          </div>
+          <div class="summary-item">
+            <span>Payment Mode:</span>
+            <strong>Cash on Delivery (COD)</strong>
+          </div>
+          <div class="summary-item">
+            <span>Open Parcel:</span>
+            <strong style="color: #25D366;">Active</strong>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Workspace Views -->
+      <main class="admin-content">
+
+        <!-- ==========================================
+             TAB 1: OVERVIEW & FINANCIAL KPIS
+             ========================================== -->
+        <section id="pane-overview" class="admin-pane active">
+          <div class="pane-header">
+            <div>
+              <h2 class="pane-title">Business Overview & Telemetry</h2>
+              <p class="pane-desc">Live performance metrics, inventory health, and cash on delivery order funnel.</p>
+            </div>
+            <div class="pane-actions">
+              <button class="admin-btn-primary btn-goto-tab" data-target="add-product">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>Add Timepiece</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Metric Cards Grid -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">TOTAL TIMEPIECES</span>
+                <span class="kpi-icon">⌚</span>
+              </div>
+              <div id="kpi-total-prods" class="kpi-number text-gold">0</div>
+              <div class="kpi-sub">Active models in store catalog</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">WAREHOUSE UNITS</span>
+                <span class="kpi-icon">📦</span>
+              </div>
+              <div id="kpi-total-stock" class="kpi-number">0</div>
+              <div class="kpi-sub">Total inventory available for dispatch</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">LOW STOCK ALERT</span>
+                <span class="kpi-icon" style="color: #ffaa00;">⚠️</span>
+              </div>
+              <div id="kpi-low-stock" class="kpi-number" style="color: #ffaa00;">0</div>
+              <div class="kpi-sub">Models with ≤ 5 units remaining</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">OUT OF STOCK</span>
+                <span class="kpi-icon" style="color: #ff4d4d;">🛑</span>
+              </div>
+              <div id="kpi-out-stock" class="kpi-number" style="color: #ff4d4d;">0</div>
+              <div class="kpi-sub">Requires factory replenishment</div>
+            </div>
+
+            <div class="kpi-card kpi-card-featured">
+              <div class="kpi-header">
+                <span class="kpi-title">INVENTORY VALUATION</span>
+                <span class="kpi-icon">💰</span>
+              </div>
+              <div id="kpi-inv-value" class="kpi-number text-gold">Rs. 0</div>
+              <div class="kpi-sub">Total retail stock value in PKR</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">NATIONWIDE COD ORDERS</span>
+                <span class="kpi-icon" style="color: #25D366;">🚚</span>
+              </div>
+              <div id="kpi-orders-count" class="kpi-number text-green">0</div>
+              <div class="kpi-sub">Customer orders via web & checkout</div>
+            </div>
+          </div>
+
+          <!-- Recent Orders Quick Preview -->
+          <div class="content-box" style="margin-top: 2rem;">
+            <div class="box-header">
+              <h3 class="box-title">Recent Cash on Delivery Orders</h3>
+              <button class="admin-btn-outline btn-goto-tab" data-target="orders">View All Orders →</button>
+            </div>
+            <div class="table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Order #</th>
+                    <th>Customer</th>
+                    <th>Destination</th>
+                    <th>Watches Ordered</th>
+                    <th>Total PKR</th>
+                    <th>Delivery Status</th>
+                  </tr>
+                </thead>
+                <tbody id="overview-orders-tbody">
+                  <tr>
+                    <td colspan="6" class="text-center-empty">No orders placed yet. Orders made on the store will appear here in real time.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==========================================
+             TAB 2: INVENTORY & STOCK MANAGEMENT
+             ========================================== -->
+        <section id="pane-inventory" class="admin-pane">
+          <div class="pane-header">
+            <div>
+              <h2 class="pane-title">Timepiece Inventory Management</h2>
+              <p class="pane-desc">Monitor warehouse stock, update prices, edit specifications, or remove models from the catalog.</p>
+            </div>
+            <div class="pane-actions">
+              <button class="admin-btn-primary btn-goto-tab" data-target="add-product">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>Add Timepiece</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter Toolbar -->
+          <div class="filter-toolbar">
+            <div class="search-input-wrap">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="admin-search-input" placeholder="Search by model name, brand (Rolex, Tissot, Casio), or SKU..." class="toolbar-search" />
+            </div>
+
+            <div class="filter-select-group">
+              <select id="admin-filter-category" class="toolbar-select">
+                <option value="all">All Watch Categories</option>
+                <option value="luxury">Luxury Swiss (Rolex, Omega, Tissot)</option>
+                <option value="sports">Japanese Sports (Casio, Seiko)</option>
+                <option value="fashion">Fashion Brands (MK, Fossil)</option>
+                <option value="budget">Budget Friendly Under 15k</option>
+              </select>
+
+              <select id="admin-filter-stock" class="toolbar-select">
+                <option value="all">All Stock Levels</option>
+                <option value="in_stock">In Stock (> 5 units)</option>
+                <option value="low_stock">Low Stock (1-5 units)</option>
+                <option value="out_of_stock">Out of Stock (0 units)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Inventory Table -->
+          <div class="content-box">
+            <div class="table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Timepiece Details</th>
+                    <th>Category</th>
+                    <th>Retail Price</th>
+                    <th>Live Stock (Units)</th>
+                    <th>Stock Status</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="inventory-table-body">
+                  <!-- Populated by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==========================================
+             TAB 3: ADD NEW PRODUCT WITH IMAGES
+             ========================================== -->
+        <section id="pane-add-product" class="admin-pane">
+          <div class="pane-header">
+            <div>
+              <h2 class="pane-title">Add New Timepiece to Store</h2>
+              <p class="pane-desc">Publish a new brand, model, image, and initial warehouse stock units to the public catalog.</p>
+            </div>
+          </div>
+
+          <form id="add-product-form" class="product-form-grid">
+            
+            <!-- Left Column: Details -->
+            <div class="form-card">
+              <h3 class="form-section-title">General Specifications</h3>
+
+              <div class="form-group">
+                <label for="prod-name" class="admin-label">Timepiece Model Title *</label>
+                <input type="text" id="prod-name" class="admin-input" placeholder="e.g. Omega Seamaster Diver 300M" required />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="prod-brand" class="admin-label">Brand Name *</label>
+                  <input type="text" id="prod-brand" class="admin-input" placeholder="e.g. Omega / Rolex / Casio" required />
+                </div>
+                <div class="form-group">
+                  <label for="prod-category" class="admin-label">Storefront Category *</label>
+                  <select id="prod-category" class="admin-input" required>
+                    <option value="luxury">Luxury Swiss</option>
+                    <option value="sports">Japanese Sports</option>
+                    <option value="fashion">Fashion Brands</option>
+                    <option value="budget">Budget Friendly (Under 15k)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="prod-price" class="admin-label">Retail Selling Price (PKR) *</label>
+                  <input type="number" id="prod-price" class="admin-input" placeholder="e.g. 295000" min="1000" required />
+                </div>
+                <div class="form-group">
+                  <label for="prod-strike" class="admin-label">Original / Strike Price (PKR)</label>
+                  <input type="number" id="prod-strike" class="admin-input" placeholder="e.g. 320000 (Shows discount)" min="1000" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="prod-stock" class="admin-label">Initial Stock Units *</label>
+                  <input type="number" id="prod-stock" class="admin-input" placeholder="e.g. 10" min="0" required />
+                </div>
+                <div class="form-group">
+                  <label for="prod-sku" class="admin-label">SKU / Model Code *</label>
+                  <input type="text" id="prod-sku" class="admin-input" placeholder="e.g. OMG-SEA-300M" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="prod-movement" class="admin-label">Movement / Caliber</label>
+                  <input type="text" id="prod-movement" class="admin-input" placeholder="e.g. Co-Axial Master Chronometer" />
+                </div>
+                <div class="form-group">
+                  <label for="prod-case" class="admin-label">Case & Strap Specs</label>
+                  <input type="text" id="prod-case" class="admin-input" placeholder="e.g. 42mm Steel • Ceramic Bezel" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="prod-warranty" class="admin-label">Warranty Coverage</label>
+                <input type="text" id="prod-warranty" class="admin-input" placeholder="e.g. 2 Years International Warranty" value="2 Years International Warranty" />
+              </div>
+
+              <div class="form-group">
+                <label for="prod-desc" class="admin-label">Catalog Description</label>
+                <textarea id="prod-desc" class="admin-textarea" rows="3" placeholder="Brief selling points, dial details, water resistance..."></textarea>
+              </div>
+            </div>
+
+            <!-- Right Column: Product Photography & Presets -->
+            <div class="form-card">
+              <h3 class="form-section-title">Product Image & Media</h3>
+
+              <div class="preview-box">
+                <img id="form-img-preview" src="/images/watch-rolex.jpg" alt="Selected Preview" class="preview-image" />
+              </div>
+
+              <!-- Drag & Drop Uploader -->
+              <div class="upload-dropzone" id="upload-dropzone">
+                <input type="file" id="prod-file-input" accept="image/*" class="file-hidden" />
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="text-gold">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="17 8 12 3 7 8"></polyline>
+                  <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <div class="drop-text">Drag & drop watch image or <span class="drop-link">browse files</span></div>
+                <div class="drop-sub">Supports JPG, PNG, WEBP (stored in local database)</div>
+              </div>
+
+              <!-- Direct URL -->
+              <div class="form-group" style="margin-top: 1rem;">
+                <label for="prod-img-url" class="admin-label">Or enter direct Image URL</label>
+                <input type="url" id="prod-img-url" class="admin-input" placeholder="https://.../watch.jpg" />
+              </div>
+
+              <!-- Preset Pakistani Catalog Gallery -->
+              <div class="preset-section">
+                <div class="admin-label">Or choose from Pakistan Watch Presets</div>
+                <div id="admin-preset-gallery" class="preset-grid">
+                  <!-- Injected via JavaScript -->
+                </div>
+              </div>
+
+              <!-- Submit Buttons -->
+              <div class="form-actions-bar">
+                <button type="submit" class="admin-btn-primary" style="flex: 1; justify-content: center; padding: 0.85rem;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                    <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                    <polyline points="7 3 7 8 15 8"></polyline>
+                  </svg>
+                  <span>PUBLISH TIMEPIECE TO STORE</span>
+                </button>
+                <button type="reset" class="admin-btn-outline" style="padding: 0.85rem 1.2rem;">
+                  <span>Clear</span>
+                </button>
+              </div>
+
+            </div>
+
+          </form>
+        </section>
+
+
+        <!-- ==========================================
+             TAB 4: NATIONWIDE CASH ON DELIVERY ORDERS
+             ========================================== -->
+        <section id="pane-orders" class="admin-pane">
+          <div class="pane-header">
+            <div>
+              <h2 class="pane-title">Nationwide Cash on Delivery (COD) Orders</h2>
+              <p class="pane-desc">Manage customer orders placed via the storefront checkout and WhatsApp order pipeline.</p>
+            </div>
+            <div class="pane-actions">
+              <button id="btn-export-csv" class="admin-btn-outline">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Export Orders to CSV</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="content-box">
+            <div class="table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Order # & Date</th>
+                    <th>Customer Details</th>
+                    <th>Destination City</th>
+                    <th>Items & Caliber</th>
+                    <th>Amount (PKR)</th>
+                    <th>Delivery Status</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-table-body">
+                  <!-- Populated by JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ==========================================
+             TAB 5: STORE SETTINGS & TOOLS
+             ========================================== -->
+        <section id="pane-settings" class="admin-pane">
+          <div class="pane-header">
+            <div>
+              <h2 class="pane-title">Store Settings & Database Operations</h2>
+              <p class="pane-desc">Database backups, factory catalog resets, and security session controls.</p>
+            </div>
+          </div>
+
+          <div class="settings-grid">
+            <div class="settings-card">
+              <h3 class="settings-card-title">Database Export & Backup</h3>
+              <p class="settings-card-desc">Download a complete JSON snapshot of all active products, inventory stock levels, and order history.</p>
+              <button id="btn-backup-json" class="admin-btn-outline">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Download Database JSON</span>
+              </button>
+            </div>
+
+            <div class="settings-card settings-card-warning">
+              <h3 class="settings-card-title text-gold">Factory Catalog Reset</h3>
+              <p class="settings-card-desc">Restore the original 8 curated watch models (Rolex, Tissot, Casio Edifice, Curren, MK Lexington, etc.) to default warehouse values.</p>
+              <button id="btn-reset-factory" class="admin-btn-danger">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                <span>Reset to Factory Catalog Defaults</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+  </div>
+
+
+  <!-- ========================================================
+       3. EDIT PRODUCT MODAL (Pop-up on the admin page)
+       ======================================================== -->
+  <div id="admin-edit-modal" class="admin-modal-overlay">
+    <div class="admin-edit-box">
+      <div class="box-header">
+        <h3 class="box-title">Edit Product Details</h3>
+        <button id="btn-close-edit" class="modal-close">&times;</button>
+      </div>
+
+      <form id="edit-product-form" class="edit-form">
+        <input type="hidden" id="edit-prod-id" />
+
+        <div class="form-group">
+          <label class="admin-label">Model Title</label>
+          <input type="text" id="edit-prod-name" class="admin-input" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="admin-label">Price (PKR)</label>
+            <input type="number" id="edit-prod-price" class="admin-input" required />
+          </div>
+          <div class="form-group">
+            <label class="admin-label">Original / Strike Price</label>
+            <input type="number" id="edit-prod-strike" class="admin-input" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="admin-label">Stock Units</label>
+            <input type="number" id="edit-prod-stock" class="admin-input" min="0" required />
+          </div>
+          <div class="form-group">
+            <label class="admin-label">SKU</label>
+            <input type="text" id="edit-prod-sku" class="admin-input" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="admin-label">Caliber / Specifications</label>
+          <input type="text" id="edit-prod-caliber" class="admin-input" />
+        </div>
+
+        <div class="form-actions-bar" style="margin-top: 1.5rem;">
+          <button type="submit" class="admin-btn-primary" style="flex: 1; justify-content: center;">Save Changes</button>
+          <button type="button" id="btn-cancel-edit" class="admin-btn-outline">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/src/admin.js"></script>
+</body>
+</html>
