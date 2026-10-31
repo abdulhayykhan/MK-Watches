@@ -1,8 +1,8 @@
 # ⌚ MK Watches Pakistan — Luxury 3D E-Commerce Experience
 
-> An ultra-luxury, high-performance 3D timepiece e-commerce platform and executive management system tailored for the Pakistan luxury watch market.
+> An ultra-luxury, high-performance 3D timepiece e-commerce platform and executive management portal tailored for the Pakistan luxury watch market.
 
-![MK Watches Preview](logo-black.png)
+![MK Watches Preview](public/logo-black.png)
 
 ---
 
@@ -19,7 +19,7 @@
 - **Cinematic Motion & Inertia**: Powered by **Lenis** smooth scroll and **GSAP** timeline animations.
 - **Pakistan-First Checkout**: Built-in support for **Cash on Delivery (COD)**, TCS / Leopards Express delivery, Open Parcel Inspection guarantee, and Direct WhatsApp Order dispatch.
 - **Cart & Bag Drawer**: Instant drawer with live price calculations, currency formatting in PKR, and local storage persistence.
-- **100% Responsive Design**: Engineered and tested across Ultrawide 4K (2560px), Desktop, Tablet (Portrait & Landscape), and Mobile screens down to ultra-compact 320px.
+- **100% Responsive Design**: Engineered and verified across Ultrawide 4K (2560px), Desktop, Tablet (Portrait & Landscape), and Mobile screens down to ultra-compact 320px.
 
 ### 🔐 Standalone Executive Management Portal (`admin.html`)
 - **Discrete & Secure**: Standalone executive portal accessible only via encrypted Master PIN verification (`admin.html`).
@@ -89,7 +89,7 @@ MK-Watches/
 ├── admin.html             # Standalone executive commerce management portal
 ├── index.html             # Customer-facing luxury storefront & 3D visualizer
 ├── public/                # Static assets, high-res watch textures & models
-│   ├── images/            # Curated timepiece images & exploded layers
+│   ├── images/            # Curated timepiece images & clean watch layers
 │   ├── logo-black.png     # Dark edition insignia
 │   └── logo-white.png     # Light edition insignia
 ├── src/
@@ -98,9 +98,9 @@ MK-Watches/
 │   ├── scene/             # Three.js 3D watch scene setup, lighting & controls
 │   ├── styles/            # Styling architecture (main.css & admin.css)
 │   └── utils/             # Inventory management, formatters & state storage
-├── scripts/               # Deep visual audit, image processing & validation suites
-├── package.json           # Project manifest & scripts
-└── vite.config.js         # Multi-page Vite configuration (index.html + admin.html)
+├── package.json           # Project manifest & dependencies
+├── vite.config.js         # Multi-page Vite configuration (index.html + admin.html)
+└── LICENSE                # Open source MIT License
 ```
 
 ---
@@ -113,4 +113,4 @@ The admin management console is kept decoupled from public navigation and access
 
 ## 📄 License
 
-Private repository & proprietary design for **MK Watches Pakistan**. All rights reserved.
+This project is licensed under the [MIT License](LICENSE) — see the LICENSE file for details. Built with pride for **MK Watches Pakistan**.

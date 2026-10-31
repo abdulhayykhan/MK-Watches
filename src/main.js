@@ -322,8 +322,8 @@ class App {
       document.body.classList.toggle('theme-dark', isDark);
       document.body.classList.toggle('theme-light', !isDark);
 
-      // In white mode -> use logo-white.png; in dark mode -> use logo-black.png
-      const logoFile = isDark ? 'logo-black.png' : 'logo-white.png';
+      // In white mode -> use /logo-white.png; in dark mode -> use /logo-black.png
+      const logoFile = isDark ? '/logo-black.png' : '/logo-white.png';
 
       // Update navbar, preloader, and footer logos
       const navLogo = document.getElementById('nav-logo');
